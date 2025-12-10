@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siyasi Liderlik Envanteri | Marmara GDS</title>
+    <meta name="description" content="Marmara GDS Küresel Diplomasi Kulübü Siyasi Liderlik Testi">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="logo-area">
-                <i class="fa-solid fa-landmark logo-icon"></i>
-                <div class="logo-text">
+    <header class="site-header">
+        <div class="header-content">
+            <div class="brand">
+                <i class="fa-solid fa-globe brand-icon"></i>
+                <div class="brand-text">
                     <h1>MARMARA GDS</h1>
                     <span>KÜRESEL DİPLOMASİ KULÜBÜ</span>
                 </div>
@@ -22,135 +23,119 @@
         </div>
     </header>
 
-    <main class="app-container">
+    <main class="main-container">
         
-        <section id="start-screen" class="screen active">
-            <div class="card start-card">
-                <div class="card-header-accent"></div>
-                <div class="card-body">
-                    <h2 class="title-lg">Siyasi Karakter Analizi</h2>
-                    <p class="subtitle">Realizm, İdealizm ve Güç Politikaları</p>
+        <section id="screen-start" class="screen active">
+            <div class="card intro-card">
+                <div class="card-deco-top"></div>
+                <div class="card-content">
+                    <h2 class="headline">Siyasi Karakter Analizi</h2>
+                    <p class="sub-headline">Realizm, İdealizm ve Güç Dengeleri</p>
                     
-                    <div class="intro-text">
-                        <p>Bu envanter, 30 adet stratejik soru üzerinden siyasi reflekslerinizi analiz eder ve sizi dünya tarihine yön veren 39 liderden biriyle eşleştirir.</p>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-check"></i> Akademik tabanlı doktrin analizi</li>
-                            <li><i class="fa-solid fa-check"></i> 4 Farklı siyasi eksen puanlaması</li>
-                            <li><i class="fa-solid fa-check"></i> Kapsamlı lider profili</li>
+                    <div class="description">
+                        <p>Bu envanter, uluslararası ilişkiler teorileri baz alınarak hazırlanmış 30 stratejik soru üzerinden siyasi reflekslerinizi analiz eder.</p>
+                        <ul class="info-list">
+                            <li><i class="fa-solid fa-check-circle"></i> 39 Dünya Lideri ile Eşleşme</li>
+                            <li><i class="fa-solid fa-check-circle"></i> 4 Farklı Siyasi Eksen Analizi</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Akademik Tabanlı Algoritma</li>
                         </ul>
                     </div>
 
-                    <button id="start-btn" class="btn btn-primary btn-lg">
+                    <button id="btn-start" class="btn btn-primary btn-large">
                         Analizi Başlat <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
         </section>
 
-        <section id="quiz-screen" class="screen">
-            <div class="quiz-status-bar">
-                <span class="status-label">İLERLEME DURUMU</span>
-                <span id="question-count-display">Soru 1 / 30</span>
+        <section id="screen-quiz" class="screen">
+            <div class="quiz-header">
+                <span class="quiz-label">ANALİZ DURUMU</span>
+                <span id="quiz-counter">Soru 1 / 30</span>
             </div>
             
-            <div class="progress-track">
+            <div class="progress-container">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
 
             <div class="card question-card">
-                <div class="question-header">
-                    <h3 id="question-text">Soru yükleniyor...</h3>
+                <div class="question-box">
+                    <h3 id="txt-question">Soru yükleniyor...</h3>
                 </div>
                 
-                <div id="options-container" class="options-grid">
+                <div id="container-options" class="options-grid">
                     </div>
             </div>
         </section>
 
-        <section id="loading-screen" class="screen">
-            <div class="loading-content">
-                <div class="spinner-box">
-                    <div class="circle-border">
-                        <div class="circle-core"></div>
-                    </div>  
-                </div>
+        <section id="screen-loading" class="screen">
+            <div class="loading-wrapper">
+                <div class="loader-circle"></div>
                 <h3>Veriler İşleniyor</h3>
-                <p id="loading-text">Diplomatik arşivler taranıyor...</p>
+                <p id="txt-loading">Diplomatik arşivler taranıyor...</p>
             </div>
         </section>
 
-        <section id="result-screen" class="screen">
+        <section id="screen-result" class="screen">
             <div class="card result-card">
-                <div class="result-header-bg">
-                    <div class="match-badge">
-                        Eşleşme Oranı: %<span id="match-percent">95</span>
+                <div class="result-header-area">
+                    <div class="match-tag">
+                        Eşleşme Oranı: %<span id="val-match">0</span>
                     </div>
                 </div>
                 
-                <div class="result-content">
-                    <div class="leader-avatar">
+                <div class="result-body">
+                    <div class="avatar-placeholder">
                         <i class="fa-solid fa-user-tie"></i>
                     </div>
                     
-                    <h2 id="leader-name">Lider İsmi</h2>
-                    <p id="leader-title">Lider Ünvanı</p>
+                    <h2 id="val-leader-name">Lider İsmi</h2>
+                    <p id="val-leader-title">Ünvan</p>
 
-                    <div class="quote-box">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p id="leader-quote">Liderin sözü buraya gelecek.</p>
+                    <div class="quote-area">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p id="val-leader-quote">Liderin sözü.</p>
                     </div>
 
-                    <p id="leader-bio" class="leader-bio">Biyografi metni.</p>
+                    <p id="val-leader-bio" class="bio-text">Biyografi.</p>
 
-                    <div class="stats-wrapper">
+                    <div class="stats-area">
                         <h4>Doktrin Profili</h4>
                         
-                        <div class="stat-row">
-                            <div class="stat-info">
+                        <div class="stat-group">
+                            <div class="stat-labels">
                                 <span>Otoriter</span>
                                 <span>Demokratik</span>
                             </div>
-                            <div class="stat-track">
-                                <div id="bar-auth" class="stat-bar"></div>
-                                <div class="stat-center-line"></div>
-                            </div>
+                            <div class="stat-track"><div id="bar-auth" class="stat-bar"></div></div>
                         </div>
 
-                        <div class="stat-row">
-                            <div class="stat-info">
+                        <div class="stat-group">
+                            <div class="stat-labels">
                                 <span>Devletçi (Sol)</span>
                                 <span>Liberal (Sağ)</span>
                             </div>
-                            <div class="stat-track">
-                                <div id="bar-eco" class="stat-bar"></div>
-                                <div class="stat-center-line"></div>
-                            </div>
+                            <div class="stat-track"><div id="bar-eco" class="stat-bar"></div></div>
                         </div>
 
-                        <div class="stat-row">
-                            <div class="stat-info">
+                        <div class="stat-group">
+                            <div class="stat-labels">
                                 <span>Ulusalcı</span>
                                 <span>Küreselci</span>
                             </div>
-                            <div class="stat-track">
-                                <div id="bar-diplo" class="stat-bar"></div>
-                                <div class="stat-center-line"></div>
-                            </div>
+                            <div class="stat-track"><div id="bar-diplo" class="stat-bar"></div></div>
                         </div>
 
-                        <div class="stat-row">
-                            <div class="stat-info">
+                        <div class="stat-group">
+                            <div class="stat-labels">
                                 <span>İdealist</span>
                                 <span>Realist</span>
                             </div>
-                            <div class="stat-track">
-                                <div id="bar-style" class="stat-bar"></div>
-                                <div class="stat-center-line"></div>
-                            </div>
+                            <div class="stat-track"><div id="bar-style" class="stat-bar"></div></div>
                         </div>
                     </div>
 
-                    <button class="btn btn-outline" onclick="location.reload()">
+                    <button id="btn-restart" class="btn btn-outline">
                         <i class="fa-solid fa-rotate-right"></i> Testi Tekrarla
                     </button>
                 </div>
@@ -159,7 +144,7 @@
 
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2025 Marmara GDS - Küresel Diplomasi Kulübü</p>
     </footer>
 
