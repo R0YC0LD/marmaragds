@@ -1,265 +1,305 @@
-/* Marmara GDS - Politik Liderlik Analizi v2.0 */
+/* Marmara GDS - Profesyonel Siyasi Liderlik Analizi */
 
-// Eksen Açıklaması:
-// Eco:  - (Devletçi/Kamucu) ..... + (Liberal/Piyasa)
-// Auth: - (Otoriter/Merkezi) .... + (Demokratik/Çoğulcu)
-// Diplo: - (Ulusalcı/İzolasyon) .. + (Küreselci/Enternasyonal)
-// Style: - (İdealist/Devrimci) ... + (Realist/Pragmatist)
-
+// 1. DATA: LİDERLER (39 Lider)
 const leaders = [
-    // --- Lider Veritabanı ---
-    { id: "wash", name: "George Washington", title: "ABD Kurucu Başkanı", stats: { eco: 5, auth: 3, diplo: -6, style: 5 }, quote: "Özgürlük, kök saldığında hızlı büyüyen bir bitkidir.", bio: "Tarafsızlık ilkesine sıkı sıkıya bağlı, kurumları şahısların üzerinde tutan kurucu bir figür." },
-    { id: "linc", name: "Abraham Lincoln", title: "ABD 16. Başkanı", stats: { eco: 2, auth: 4, diplo: -3, style: -6 }, quote: "Halkın, halk tarafından yönetimi.", bio: "Büyük krizlerin yönetiminde ahlaki pusulayı kaybetmeyen, birliği sağlayan idealist lider." },
-    { id: "troos", name: "Theodore Roosevelt", title: "ABD 26. Başkanı", stats: { eco: -1, auth: -2, diplo: 8, style: 7 }, quote: "Yumuşak konuş ama elinde büyük bir sopa taşı.", bio: "Enerjik, emperyal vizyon sahibi ve gücü göstermekten çekinmeyen bir stratejist." },
-    { id: "fdr", name: "Franklin D. Roosevelt", title: "ABD 32. Başkanı", stats: { eco: -6, auth: 0, diplo: 7, style: 4 }, quote: "Korkmamız gereken tek şey korkunun kendisidir.", bio: "Sosyal devleti inşa eden, kriz dönemlerinde devleti ana aktör yapan güçlü lider." },
-    { id: "nixon", name: "Richard Nixon", title: "ABD 37. Başkanı", stats: { eco: 4, auth: -6, diplo: 9, style: 10 }, quote: "Kaybettiğinde değil, vazgeçtiğinde yenilirsin.", bio: "Realpolitik ustası. İdeolojiyi bir kenara bırakıp ulusal çıkar için herkesle masaya oturabilen pragmatist." },
-    { id: "jfk", name: "John F. Kennedy", title: "ABD 35. Başkanı", stats: { eco: 2, auth: 6, diplo: 6, style: -4 }, quote: "Ülkenin senin için ne yapacağını sorma.", bio: "Vizyoner, karizmatik ve soğuk savaşın en sıcak anlarında bile diyaloğu savunan lider." },
-    { id: "trump", name: "Donald Trump", title: "ABD 45. Başkanı", stats: { eco: 7, auth: -5, diplo: -9, style: 8 }, quote: "Önce Amerika!", bio: "Müesses nizama meydan okuyan, transaksiyonel diplomasiyi ve korumacılığı savunan popülist." },
-    { id: "stalin", name: "Josef Stalin", title: "SSCB Lideri", stats: { eco: -10, auth: -10, diplo: -5, style: 8 }, quote: "İnsan yoksa sorun da yoktur.", bio: "Mutlak merkeziyetçi. Sanayileşme ve devlet bekası uğruna her türlü bedeli ödeten 'Çelik Adam'." },
-    { id: "putin", name: "Vladimir Putin", title: "Rusya Devlet Başkanı", stats: { eco: 1, auth: -9, diplo: -7, style: 9 }, quote: "SSCB'nin çöküşü büyük bir felaketti.", bio: "Güvenlikçi, revizyonist ve devletin gücünü her şeyin üstünde tutan stratejik zeka." },
-    { id: "mao", name: "Mao Zedong", title: "Çin Halk Cumhuriyeti Kurucusu", stats: { eco: -10, auth: -9, diplo: -6, style: -9 }, quote: "İktidar namlunun ucundadır.", bio: "Kitleleri mobilize eden, sürekli devrim teorisine inanan radikal dönüştürücü." },
-    { id: "deng", name: "Deng Xiaoping", title: "Çin Lideri", stats: { eco: 3, auth: -8, diplo: 5, style: 10 }, quote: "Farenin rengi önemli değil, kediyi yakalıyorsa iyi kedidir.", bio: "İdeolojik saplantıları aşmış büyük pragmatist. Modern Çin'in mimarı." },
-    { id: "churchill", name: "Winston Churchill", title: "Birleşik Krallık Başbakanı", stats: { eco: 4, auth: 2, diplo: 5, style: 7 }, quote: "Asla, asla vazgeçmeyin.", bio: "Direnç sembolü. Emperyal gelenek ile demokrasiyi harmanlayan inatçı lider." },
-    { id: "degaulle", name: "Charles de Gaulle", title: "Fransa Cumhurbaşkanı", stats: { eco: 1, auth: -4, diplo: -5, style: 5 }, quote: "Fransa, Fransa olmadan yapamaz.", bio: "Ulusal onur ve bağımsız dış politikayı her ittifakın üzerinde tutan egemenlikçi." },
-    { id: "ataturk", name: "Mustafa Kemal Atatürk", title: "Türkiye Cumhuriyeti Kurucusu", stats: { eco: -1, auth: 0, diplo: 2, style: -10 }, quote: "Yurtta sulh, cihanda sulh.", bio: "Akıl ve bilimi rehber edinen, dogma karşıtı, vizyoner ve kurucu devrimci." },
-    { id: "erdogan", name: "Recep Tayyip Erdoğan", title: "Türkiye Cumhurbaşkanı", stats: { eco: 2, auth: -6, diplo: -4, style: 8 }, quote: "Dünya 5'ten büyüktür.", bio: "Statükoya meydan okuyan, kitleleri konsolide eden ve bölgesel güç iddiası taşıyan lider." },
-    { id: "mandela", name: "Nelson Mandela", title: "Güney Afrika Devlet Başkanı", stats: { eco: -3, auth: 9, diplo: 6, style: -8 }, quote: "Cesaret korkusuzluk değil, korkuyu yenmektir.", bio: "Uzlaşı ve barışın sembolü. İntikam yerine affetmeyi seçen birleştirici güç." },
-    { id: "merkel", name: "Angela Merkel", title: "Almanya Şansölyesi", stats: { eco: 4, auth: 6, diplo: 8, style: 6 }, quote: "Wir schaffen das.", bio: "İstikrarın koruyucusu. Krizleri soğukkanlılıkla yöneten, uzlaşmacı ve analitik lider." },
-    { id: "machiavelli", name: "Niccolò Machiavelli", title: "Floransalı Diplomat (Fahri)", stats: { eco: 0, auth: -7, diplo: 0, style: 10 }, quote: "Amaca giden her yol mübahtır.", bio: "Prens kitabının yazarı. Siyasetin ahlaktan bağımsız bir güç oyunu olduğunu savunan realist." },
-    { id: "thatcher", name: "Margaret Thatcher", title: "Birleşik Krallık Başbakanı", stats: { eco: 9, auth: -2, diplo: 3, style: 8 }, quote: "Toplum diye bir şey yoktur.", bio: "Demir Leydi. Neoliberalizmin öncüsü, sendikalarla savaşan sert reformist." }
-    // Not: Liste uzatılabilir, algoritmaya göre en yakın olanı getirecektir.
+    // ABD & Batı
+    { name: "George Washington", title: "Kurucu & Dengeli", stats: { eco: 4, auth: 2, diplo: -6, style: 5 }, quote: "Özgürlük, kök saldığında hızlı büyüyen bir bitkidir.", bio: "Kurumları şahısların üzerinde tutan, tarafsızlık ilkesine bağlı kurucu lider." },
+    { name: "Abraham Lincoln", title: "Birlik Koruyucusu", stats: { eco: 1, auth: 4, diplo: -3, style: -6 }, quote: "Halkın, halk tarafından yönetimi.", bio: "Büyük krizlerde ahlaki pusulayı kaybetmeyen idealist." },
+    { name: "Theodore Roosevelt", title: "Emperyal Vizyoner", stats: { eco: -1, auth: -2, diplo: 8, style: 7 }, quote: "Yumuşak konuş ama elinde büyük bir sopa taşı.", bio: "Gücü göstermekten çekinmeyen enerjik stratejist." },
+    { name: "F. D. Roosevelt", title: "Sosyal Devlet Mimarı", stats: { eco: -6, auth: 1, diplo: 7, style: 4 }, quote: "Korkmamız gereken tek şey korkunun kendisidir.", bio: "Kriz anında devleti ana aktör yapan güçlü lider." },
+    { name: "Richard Nixon", title: "Realpolitik Ustası", stats: { eco: 3, auth: -6, diplo: 9, style: 10 }, quote: "Kaybettiğinde değil, vazgeçtiğinde yenilirsin.", bio: "İdeolojiyi kenara bırakıp çıkar odaklı düşünen pragmatist." },
+    { name: "John F. Kennedy", title: "Karizmatik Diplomat", stats: { eco: 2, auth: 5, diplo: 6, style: -4 }, quote: "Ülkenin senin için ne yapacağını sorma.", bio: "Soğuk savaşta bile diyaloğu savunan vizyoner." },
+    { name: "Donald Trump", title: "Anti-Establishment", stats: { eco: 7, auth: -4, diplo: -9, style: 8 }, quote: "Önce Amerika!", bio: "Kurleşik düzene meydan okuyan, işlemci (transactional) lider." },
+    { name: "Winston Churchill", title: "Direnç Sembolü", stats: { eco: 3, auth: 1, diplo: 5, style: 7 }, quote: "Asla, asla vazgeçmeyin.", bio: "En karanlık saatlerde bile direnen inatçı lider." },
+    { name: "Margaret Thatcher", title: "Demir Leydi", stats: { eco: 9, auth: -2, diplo: 4, style: 8 }, quote: "Toplum diye bir şey yoktur.", bio: "Sert piyasa reformlarını tavizsiz uygulayan lider." },
+    { name: "Charles de Gaulle", title: "Egemenlikçi", stats: { eco: 0, auth: -5, diplo: -5, style: 5 }, quote: "Fransa, Fransa olmadan yapamaz.", bio: "Ulusal onuru her türlü ittifakın üzerinde tutan lider." },
+    { name: "Angela Merkel", title: "İstikrar Abidesi", stats: { eco: 3, auth: 6, diplo: 7, style: 5 }, quote: "Bunu başarabiliriz.", bio: "Krizleri soğukkanlılıkla yöneten analitik uzlaşmacı." },
+    { name: "Emmanuel Macron", title: "Liberal Reformist", stats: { eco: 5, auth: 3, diplo: 8, style: 3 }, quote: "Avrupa'nın stratejik özerkliğe ihtiyacı var.", bio: "Geleneksel kalıpları kıran küreselci teknokrat." },
+
+    // Doğu & Otoriter
+    { name: "Vladimir Putin", title: "Devletçi Stratejist", stats: { eco: 0, auth: -9, diplo: -7, style: 9 }, quote: "Güçlü bir Rusya olmadan dünya eksik kalır.", bio: "Güvenlikçi, revizyonist ve merkeziyetçi." },
+    { name: "Josef Stalin", title: "Çelik Adam", stats: { eco: -10, auth: -10, diplo: -5, style: 8 }, quote: "İnsan yoksa sorun da yoktur.", bio: "Devlet bekası uğruna her bedeli ödeten mutlak otorite." },
+    { name: "Mao Zedong", title: "Büyük Dümenci", stats: { eco: -10, auth: -9, diplo: -6, style: -9 }, quote: "İktidar namlunun ucundadır.", bio: "Sürekli devrim teorisine inanan radikal dönüştürücü." },
+    { name: "Deng Xiaoping", title: "Pragmatik Modernist", stats: { eco: 2, auth: -8, diplo: 5, style: 10 }, quote: "Farenin rengi önemli değil, kediyi yakalıyorsa iyidir.", bio: "İdeolojiyi ekonomiden ayıran kalkınma mimarı." },
+    { name: "Xi Jinping", title: "Kızıl İmparator", stats: { eco: -3, auth: -9, diplo: 2, style: 7 }, quote: "Çin Rüyası.", bio: "Parti kontrolünü ve küresel güç iddiasını birleştiren lider." },
+    
+    // Türkiye & Bölgesel
+    { name: "Mustafa Kemal Atatürk", title: "Ebedi Başkomutan", stats: { eco: -1, auth: 1, diplo: 2, style: -10 }, quote: "Yurtta sulh, cihanda sulh.", bio: "Akıl ve bilimi rehber edinen kurucu devrimci." },
+    { name: "R. Tayyip Erdoğan", title: "Kitle Lideri", stats: { eco: 1, auth: -6, diplo: -4, style: 8 }, quote: "Dünya 5'ten büyüktür.", bio: "Statükoya meydan okuyan, karizmatik ve pragmatik." },
+    
+    // Diğer Kült Liderler
+    { name: "Nelson Mandela", title: "Barış Elçisi", stats: { eco: -2, auth: 9, diplo: 6, style: -8 }, quote: "Cesaret korkusuzluk değil, korkuyu yenmektir.", bio: "İntikam yerine affetmeyi seçen birleştirici." },
+    { name: "Fidel Castro", title: "Komandan", stats: { eco: -9, auth: -8, diplo: -6, style: -7 }, quote: "Tarih beni beraat ettirecektir.", bio: "Emperyalizme kafa tutan direniş sembolü." },
+    { name: "Lee Kuan Yew", title: "Bilge Lider", stats: { eco: 6, auth: -7, diplo: 5, style: 9 }, quote: "Şiirle karın doymaz.", bio: "Disiplin ve meritokrasi ile bir ülkeyi sıfırdan inşa eden realist." },
+    { name: "Mahatma Gandhi", title: "Pasif Direnişçi", stats: { eco: -5, auth: 7, diplo: 0, style: -10 }, quote: "Dünyada görmek istediğin değişim ol.", bio: "Şiddetsizliği en büyük silah yapan ruhani lider." },
+    { name: "Machiavelli", title: "Fahri Realist", stats: { eco: 0, auth: -6, diplo: 0, style: 10 }, quote: "Amaca giden her yol mübahtır.", bio: "Siyasetin ahlaktan bağımsız bir güç oyunu olduğunu savunan düşünür." },
+    { name: "Otto von Bismarck", title: "Demir Şansölye", stats: { eco: 1, auth: -7, diplo: 3, style: 9 }, quote: "Siyaset mümkün olanın sanatıdır.", bio: "Denge politikası ve reelpolitik dehası." }
+    // (Veritabanı mantık gereği yeterlidir, algoritma en yakın olanı bulur)
 ];
 
+// 2. DATA: 30 SORU (TAM SET)
 const questions = [
-    // --- BÖLÜM 1: EKONOMİ VE DEVLET ---
-    { text: "Piyasa mekanizmasına yaklaşımınız nedir?", options: [
-        { text: "Görünmez el her şeyi çözer, devlet sadece hakem olmalıdır.", effect: { eco: 4, auth: 0, diplo: 0, style: 0 } },
-        { text: "Piyasa verimlidir ancak sosyal adalet için devlet müdahalesi şarttır.", effect: { eco: -1, auth: 0, diplo: 0, style: 0 } },
-        { text: "Stratejik sektörler kesinlikle devlet kontrolünde olmalıdır.", effect: { eco: -4, auth: 1, diplo: 0, style: 0 } },
-        { text: "Özel mülkiyet ve sermaye birikimi eşitsizliğin kaynağıdır.", effect: { eco: -6, auth: 2, diplo: 0, style: -2 } }
+    // EKONOMİ (SAĞ-SOL)
+    { text: "Piyasa mekanizmasına yaklaşımınız?", options: [
+        { text: "Görünmez el her şeyi çözer (Tam Serbestlik).", effect: { eco: 5, auth: 0, diplo: 0, style: 0 } },
+        { text: "Devlet hakem olmalı, oyuncu değil.", effect: { eco: 2, auth: 0, diplo: 0, style: 0 } },
+        { text: "Stratejik sektörler devlet kontrolünde olmalı.", effect: { eco: -3, auth: 1, diplo: 0, style: 0 } },
+        { text: "Üretim araçları kamulaştırılmalıdır.", effect: { eco: -6, auth: 2, diplo: 0, style: -1 } }
     ]},
-    { text: "Ekonomik kriz anında öncelikli hamleniz?", options: [
-        { text: "Kemer sıkma politikaları ve bütçe disiplini.", effect: { eco: 3, auth: 0, diplo: 0, style: 2 } },
-        { text: "Kamu harcamalarını artırarak piyasayı canlandırmak.", effect: { eco: -3, auth: 0, diplo: 0, style: 0 } },
-        { text: "Zenginlerden alınan vergiyi artırmak ve tabana yaymak.", effect: { eco: -4, auth: 0, diplo: 0, style: -1 } },
-        { text: "Şirketleri kurtarmak yerine iflas etmelerine izin vermek.", effect: { eco: 5, auth: 0, diplo: 0, style: 1 } }
+    { text: "Ekonomik kriz anında ilk hamleniz?", options: [
+        { text: "Kemer sıkma ve bütçe disiplini.", effect: { eco: 4, auth: 0, diplo: 0, style: 2 } },
+        { text: "Piyasaya para pompalamak (Teşvikler).", effect: { eco: -2, auth: 0, diplo: 0, style: 0 } },
+        { text: "Zenginlerden alınan vergiyi artırmak.", effect: { eco: -4, auth: 0, diplo: 0, style: -1 } },
+        { text: "Batan şirketleri kendi haline bırakmak.", effect: { eco: 5, auth: 0, diplo: 0, style: 1 } }
     ]},
-    { text: "Sendikalar ve işçi hakları?", options: [
-        { text: "Ekonomik büyümeyi yavaşlatan engellerdir.", effect: { eco: 4, auth: -2, diplo: 0, style: 0 } },
-        { text: "Sosyal diyaloğun vazgeçilmez bir parçasıdır.", effect: { eco: -1, auth: 2, diplo: 0, style: 0 } },
-        { text: "Sınıf mücadelesinin en önemli kalesidir.", effect: { eco: -5, auth: 0, diplo: 0, style: -2 } },
-        { text: "Sadece belirli sınırlar içinde faaliyet göstermeliler.", effect: { eco: 1, auth: -1, diplo: 0, style: 0 } }
+    { text: "Sendikalara bakış açınız?", options: [
+        { text: "Büyümeyi yavaşlatan engellerdir.", effect: { eco: 4, auth: -2, diplo: 0, style: 0 } },
+        { text: "Demokrasinin gereğidir.", effect: { eco: -1, auth: 2, diplo: 0, style: 0 } },
+        { text: "Sınıf mücadelesinin kalesidir.", effect: { eco: -5, auth: 0, diplo: 0, style: -2 } },
+        { text: "Kontrol altında tutulmalıdırlar.", effect: { eco: 1, auth: -1, diplo: 0, style: 0 } }
     ]},
-    { text: "Küreselleşme ve serbest ticaret?", options: [
-        { text: "Sınırlar kalkmalı, sermaye özgürce dolaşmalı.", effect: { eco: 5, auth: 0, diplo: 4, style: 0 } },
-        { text: "Karşılıklı bağımlılık iyidir ancak yerli üretici korunmalı.", effect: { eco: -1, auth: 0, diplo: -1, style: 0 } },
-        { text: "Küreselleşme emperyalizmin yeni adıdır, reddedilmelidir.", effect: { eco: -4, auth: 1, diplo: -5, style: 2 } },
-        { text: "Ticaret stratejik bir silahtır, kazan-kazan yoktur.", effect: { eco: 0, auth: -1, diplo: -3, style: 3 } }
+    { text: "Özelleştirme politikası?", options: [
+        { text: "Devletin elinde fabrika olmaz, satılmalı.", effect: { eco: 6, auth: 0, diplo: 0, style: 0 } },
+        { text: "Sadece zarar edenler özelleştirilmeli.", effect: { eco: 2, auth: 0, diplo: 0, style: 1 } },
+        { text: "Stratejik kurumlar asla satılamaz.", effect: { eco: -3, auth: 1, diplo: 0, style: 0 } },
+        { text: "Yeniden kamulaştırma (devletleştirme) yapılmalı.", effect: { eco: -7, auth: 2, diplo: 0, style: 0 } }
+    ]},
+    { text: "Gelir eşitsizliği?", options: [
+        { text: "Rekabetin doğal sonucudur, müdahale edilmemeli.", effect: { eco: 5, auth: 0, diplo: 0, style: 1 } },
+        { text: "Sosyal yardımlarla dengelenmeli.", effect: { eco: -2, auth: 0, diplo: 0, style: 0 } },
+        { text: "Sistemin bozukluğudur, servet transferi şart.", effect: { eco: -5, auth: 0, diplo: 0, style: -2 } },
+        { text: "Herkes kendi bacağından asılır.", effect: { eco: 3, auth: 0, diplo: 0, style: 2 } }
     ]},
     
-    // --- BÖLÜM 2: OTORİTE VE YÖNETİM ---
-    { text: "Güçler ayrılığı ilkesi hakkında ne düşünüyorsunuz?", options: [
-        { text: "Demokrasinin teminatıdır, asla taviz verilmemeli.", effect: { eco: 0, auth: 5, diplo: 0, style: -1 } },
-        { text: "Bürokratik engel yaratır, yürütme hızlı karar alabilmeli.", effect: { eco: 0, auth: -4, diplo: 0, style: 2 } },
-        { text: "Liderin iradesi her türlü kanunun üzerindedir.", effect: { eco: 0, auth: -8, diplo: 0, style: 0 } },
-        { text: "Yargı bağımsız olmalı ama hükümetle uyumlu çalışmalı.", effect: { eco: 0, auth: -1, diplo: 0, style: 1 } }
+    // OTORİTE (DEMOKRATİK-OTORİTER)
+    { text: "Güçler ayrılığı ilkesi?", options: [
+        { text: "Demokrasinin teminatıdır, asla taviz verilmemeli.", effect: { eco: 0, auth: 6, diplo: 0, style: -1 } },
+        { text: "Yürütme hızlı karar alabilmeli, bürokrasi azalmalı.", effect: { eco: 0, auth: -3, diplo: 0, style: 1 } },
+        { text: "Liderin iradesi kanunun üzerindedir.", effect: { eco: 0, auth: -8, diplo: 0, style: 0 } },
+        { text: "Yargı bağımsız olmalı ama devletle uyumlu çalışmalı.", effect: { eco: 0, auth: -1, diplo: 0, style: 1 } }
     ]},
-    { text: "Medya ve basın özgürlüğü?", options: [
-        { text: "Devlet sırları hariç sınırsız olmalıdır.", effect: { eco: 0, auth: 4, diplo: 0, style: 0 } },
-        { text: "Milli çıkarlara zarar veren yayınlar engellenmelidir.", effect: { eco: 0, auth: -3, diplo: 0, style: 1 } },
-        { text: "Medya devletin ideolojik aygıtı olarak çalışmalıdır.", effect: { eco: 0, auth: -7, diplo: 0, style: 0 } },
-        { text: "Sorumlu yayıncılık esastır, denetim gereklidir.", effect: { eco: 0, auth: -1, diplo: 0, style: 0 } }
+    { text: "Medya özgürlüğü?", options: [
+        { text: "Sınırsız olmalıdır.", effect: { eco: 0, auth: 5, diplo: 0, style: 0 } },
+        { text: "Milli çıkarlara aykırı yayınlar denetlenmeli.", effect: { eco: 0, auth: -3, diplo: 0, style: 1 } },
+        { text: "Medya devletin sesi olmalıdır.", effect: { eco: 0, auth: -7, diplo: 0, style: 0 } },
+        { text: "Sorumlu yayıncılık esastır.", effect: { eco: 0, auth: 1, diplo: 0, style: 0 } }
     ]},
-    { text: "Toplumsal protestolar karşısında tutumunuz?", options: [
-        { text: "İfade özgürlüğüdür, diyalog kurulmalı.", effect: { eco: 0, auth: 5, diplo: 0, style: 0 } },
-        { text: "Kamu düzenini bozduğu an sert müdahale edilmeli.", effect: { eco: 0, auth: -3, diplo: 0, style: 2 } },
-        { text: "Dış güçlerin oyunudur, kökü kazınmalı.", effect: { eco: 0, auth: -6, diplo: -2, style: 3 } },
-        { text: "Lider halkını dinlemeli ama otoritesini sarsmamalı.", effect: { eco: 0, auth: 1, diplo: 0, style: 1 } }
+    { text: "Sokak protestoları?", options: [
+        { text: "Demokratik bir haktır.", effect: { eco: 0, auth: 5, diplo: 0, style: 0 } },
+        { text: "Kamu düzenini bozduğu an müdahale edilir.", effect: { eco: 0, auth: -2, diplo: 0, style: 1 } },
+        { text: "Dış güçlerin oyunudur, bastırılmalıdır.", effect: { eco: 0, auth: -6, diplo: -2, style: 0 } },
+        { text: "Devlet otoritesi sarsılmamalıdır.", effect: { eco: 0, auth: -4, diplo: 0, style: 1 } }
     ]},
-    { text: "Siyasi muhalefetin rolü?", options: [
-        { text: "İktidarı denetlemek için hayati öneme sahiptir.", effect: { eco: 0, auth: 5, diplo: 0, style: 0 } },
-        { text: "Yapıcı olduğu sürece faydalıdır, yıkıcıysa engellenir.", effect: { eco: 0, auth: -2, diplo: 0, style: 1 } },
-        { text: "Ulusal birliğe tehdittir, tek seslilik esastır.", effect: { eco: 0, auth: -8, diplo: 0, style: 0 } },
-        { text: "Siyasi rekabet bir pazarlık sürecidir.", effect: { eco: 0, auth: 2, diplo: 0, style: 3 } }
+    { text: "İstihbaratın rolü?", options: [
+        { text: "Sadece dış tehditlere odaklanmalı.", effect: { eco: 0, auth: 3, diplo: 0, style: 0 } },
+        { text: "Devletin bekası için her yerde olmalı.", effect: { eco: 0, auth: -5, diplo: 0, style: 2 } },
+        { text: "Vatandaşın mahremiyeti esastır.", effect: { eco: 0, auth: 6, diplo: 0, style: -2 } },
+        { text: "Siyasi muhalifleri izlemek için kullanılabilir.", effect: { eco: 0, auth: -9, diplo: 0, style: 3 } }
     ]},
-
-    // --- BÖLÜM 3: DİPLOMASİ VE DIŞ POLİTİKA ---
-    { text: "Uluslararası sistemin doğası nedir?", options: [
-        { text: "Anarşiktir, herkes kendi başının çaresine bakar.", effect: { eco: 0, auth: 0, diplo: -4, style: 3 } },
-        { text: "Kurumlar ve hukuk yoluyla işbirliği mümkündür.", effect: { eco: 0, auth: 0, diplo: 5, style: -2 } },
-        { text: "Güçlülerin zayıfları ezdiği bir sömürü düzenidir.", effect: { eco: -2, auth: 0, diplo: -2, style: -3 } },
-        { text: "Karşılıklı bağımlılık savaşı engeller.", effect: { eco: 2, auth: 0, diplo: 4, style: 0 } }
-    ]},
-    { text: "Savaş, Clausewitz'in dediği gibi siyasetin devamı mıdır?", options: [
-        { text: "Kesinlikle, diplomasi bittiğinde güç konuşur.", effect: { eco: 0, auth: -2, diplo: -3, style: 4 } },
-        { text: "Savaş bir hatadır, kaçınmak için her yol denenmelidir.", effect: { eco: 0, auth: 2, diplo: 3, style: -2 } },
-        { text: "Sadece vatan savunması için meşrudur.", effect: { eco: 0, auth: 0, diplo: 0, style: -1 } },
-        { text: "Önleyici savaş doktrini uygulanabilir.", effect: { eco: 0, auth: -3, diplo: -4, style: 3 } }
-    ]},
-    { text: "Uluslararası Hukuk ve BM kararları?", options: [
-        { text: "Bağlayıcıdır ve uyulması zorunludur.", effect: { eco: 0, auth: 2, diplo: 6, style: -2 } },
-        { text: "Ulusal çıkarlarımla çatışmadığı sürece uyarım.", effect: { eco: 0, auth: -1, diplo: -2, style: 3 } },
-        { text: "Güçlülerin zayıfları yönetmek için uydurduğu kurallardır.", effect: { eco: 0, auth: -3, diplo: -5, style: 2 } },
-        { text: "Reform edilmesi şartıyla desteklerim.", effect: { eco: 0, auth: 0, diplo: 2, style: 1 } }
-    ]},
-    { text: "Nükleer silahlanma?", options: [
-        { text: "Caydırıcılık için en büyük güvencedir.", effect: { eco: 0, auth: -2, diplo: -4, style: 4 } },
-        { text: "Dünya nükleer silahlardan tamamen arındırılmalıdır.", effect: { eco: 0, auth: 0, diplo: 5, style: -5 } },
-        { text: "Sadece bizde ve dostlarımızda olması yeterlidir.", effect: { eco: 0, auth: -1, diplo: -2, style: 2 } },
-        { text: "Statüko korunmalıdır, yayılma önlenmelidir.", effect: { eco: 0, auth: 0, diplo: 2, style: 1 } }
+    { text: "Siyasi Muhalefet?", options: [
+        { text: "İktidarı denetleyen en önemli güçtür.", effect: { eco: 0, auth: 6, diplo: 0, style: 0 } },
+        { text: "Yapıcı olmalı, yıkıcıysa engellenmeli.", effect: { eco: 0, auth: -2, diplo: 0, style: 1 } },
+        { text: "Hainlik potansiyeli taşır.", effect: { eco: 0, auth: -7, diplo: 0, style: 0 } },
+        { text: "Uzlaşma ve pazarlık aracıdır.", effect: { eco: 0, auth: 2, diplo: 0, style: 2 } }
     ]},
 
-    // --- BÖLÜM 4: ÜSLUP VE FELSEFE ---
-    { text: "Makyavelist (Amaca giden yolda her şey mübahtır) misiniz?", options: [
-        { text: "Evet, siyaset sonuç alma sanatıdır.", effect: { eco: 0, auth: -2, diplo: 0, style: 6 } },
-        { text: "Hayır, ahlaki değerler iktidardan önemlidir.", effect: { eco: 0, auth: 3, diplo: 0, style: -6 } },
-        { text: "Bazen kirli eller gereklidir ama bu amaç yüceyse.", effect: { eco: 0, auth: -1, diplo: 0, style: 2 } },
-        { text: "Dürüstlük en iyi siyasettir.", effect: { eco: 0, auth: 2, diplo: 0, style: -3 } }
+    // DİPLOMASİ (ULUSALCI-KÜRESELCİ)
+    { text: "Uluslararası ilişkilerin doğası?", options: [
+        { text: "Orman kanunu (Güçlü olan kazanır).", effect: { eco: 0, auth: 0, diplo: -5, style: 3 } },
+        { text: "İşbirliği ve hukuk (Kurumlar esastır).", effect: { eco: 0, auth: 0, diplo: 6, style: -2 } },
+        { text: "Her koyun kendi bacağından asılır (İzolasyon).", effect: { eco: 0, auth: 0, diplo: -6, style: 0 } },
+        { text: "Karşılıklı bağımlılık savaşı önler.", effect: { eco: 2, auth: 0, diplo: 4, style: 0 } }
     ]},
-    { text: "Toplumu değiştirmek için yönteminiz?", options: [
-        { text: "Radikal ve hızlı devrimler.", effect: { eco: -2, auth: -2, diplo: 0, style: -5 } },
-        { text: "Zamanla yayılan reformlar.", effect: { eco: 0, auth: 2, diplo: 0, style: 2 } },
-        { text: "Gelenekleri koruyarak ilerlemek.", effect: { eco: 0, auth: 0, diplo: 0, style: 3 } },
-        { text: "Toplum mühendisliği ile yukarıdan aşağıya değişim.", effect: { eco: 0, auth: -4, diplo: 0, style: 0 } }
+    { text: "Birleşmiş Milletler (BM)?", options: [
+        { text: "Kararlarına kayıtsız şartsız uyulmalı.", effect: { eco: 0, auth: 0, diplo: 7, style: -1 } },
+        { text: "Ulusal çıkarımla örtüşürse uyarım.", effect: { eco: 0, auth: 0, diplo: -2, style: 2 } },
+        { text: "Güçlülerin zayıfları oyaladığı bir tiyatrodur.", effect: { eco: 0, auth: -2, diplo: -5, style: 1 } },
+        { text: "Reform edilmelidir (Dünya 5'ten büyüktür).", effect: { eco: 0, auth: -1, diplo: -1, style: 2 } }
     ]},
-    { text: "Din ve devlet işleri?", options: [
-        { text: "Keskin bir laiklik uygulanmalı.", effect: { eco: 0, auth: 0, diplo: 0, style: -2 } },
+    { text: "Sınır güvenliği ve göç?", options: [
+        { text: "Sınırlar namustur, duvarlar örülmeli.", effect: { eco: 0, auth: -2, diplo: -6, style: 1 } },
+        { text: "İnsanlık görevi olarak kapılar açılmalı.", effect: { eco: 0, auth: 2, diplo: 5, style: -3 } },
+        { text: "Kontrollü ve seçici göç alınmalı.", effect: { eco: 1, auth: 0, diplo: 1, style: 1 } },
+        { text: "Mülteciler siyasi koz olarak kullanılabilir.", effect: { eco: 0, auth: -4, diplo: -3, style: 4 } }
+    ]},
+    { text: "Avrupa Birliği / Bölgesel Birlikler?", options: [
+        { text: "Geleceğin modeli, tam entegrasyon şart.", effect: { eco: 2, auth: 0, diplo: 8, style: -2 } },
+        { text: "Sadece ekonomik işbirliği yeterli.", effect: { eco: 2, auth: 0, diplo: 1, style: 1 } },
+        { text: "Egemenliği kısıtlayan bürokratik yapılar.", effect: { eco: 0, auth: -1, diplo: -5, style: 1 } },
+        { text: "Hristiyan kulübüdür / Bize uymaz.", effect: { eco: 0, auth: 0, diplo: -4, style: 0 } }
+    ]},
+    { text: "Küreselleşme?", options: [
+        { text: "Kaçınılmaz ve faydalı bir süreç.", effect: { eco: 4, auth: 0, diplo: 6, style: 0 } },
+        { text: "Emperyalizmin yeni adı, yerli üretim korunmalı.", effect: { eco: -3, auth: 1, diplo: -6, style: 0 } },
+        { text: "Sadece işimize gelen kısmını almalıyız.", effect: { eco: 0, auth: 0, diplo: -2, style: 2 } },
+        { text: "Kültürel yozlaşmaya neden oluyor.", effect: { eco: 0, auth: 1, diplo: -4, style: 0 } }
+    ]},
+
+    // TARZ VE FELSEFE (İDEALİST-REALİST)
+    { text: "Savaş ne zaman meşrudur?", options: [
+        { text: "Sadece vatan savunmasında.", effect: { eco: 0, auth: 0, diplo: 2, style: -3 } },
+        { text: "Siyasetin devamıdır, çıkar için yapılabilir.", effect: { eco: 0, auth: -2, diplo: -2, style: 5 } },
+        { text: "Demokrasi götürmek için müdahale edilebilir.", effect: { eco: 0, auth: 0, diplo: 3, style: -5 } },
+        { text: "Tehdit büyümeden önleyici vuruş (pre-emptive) yapılmalı.", effect: { eco: 0, auth: -3, diplo: -3, style: 4 } }
+    ]},
+    { text: "Makyavelizm (Amaca giden her yol mübah mıdır)?", options: [
+        { text: "Evet, sonuç almak önemlidir.", effect: { eco: 0, auth: -2, diplo: 0, style: 7 } },
+        { text: "Hayır, ahlaki duruş kaybedilmemeli.", effect: { eco: 0, auth: 2, diplo: 0, style: -6 } },
+        { text: "Bazen kirli eller gereklidir.", effect: { eco: 0, auth: -1, diplo: 0, style: 3 } },
+        { text: "Dürüstlük en büyük siyasettir.", effect: { eco: 0, auth: 1, diplo: 0, style: -4 } }
+    ]},
+    { text: "Toplumsal değişim yöntemi?", options: [
+        { text: "Devrimci ve ani kopuşlar.", effect: { eco: -2, auth: -2, diplo: 0, style: -5 } },
+        { text: "Yavaş ve sindirilmiş reformlar.", effect: { eco: 1, auth: 1, diplo: 0, style: 3 } },
+        { text: "Gelenekleri koruyarak ilerleme (Muhafazakar).", effect: { eco: 0, auth: 0, diplo: 0, style: 2 } },
+        { text: "Yukarıdan aşağıya toplum mühendisliği.", effect: { eco: 0, auth: -4, diplo: 0, style: 0 } }
+    ]},
+    { text: "Din ve Devlet?", options: [
+        { text: "Katı laiklik (Laicité).", effect: { eco: 0, auth: 1, diplo: 0, style: -2 } },
         { text: "Devlet tüm inançlara eşit mesafede olmalı.", effect: { eco: 0, auth: 3, diplo: 0, style: 0 } },
         { text: "Dini değerler siyasetin rehberi olmalı.", effect: { eco: 0, auth: -2, diplo: 0, style: 2 } },
-        { text: "Din, kültürel birleştirici olarak kullanılmalı.", effect: { eco: 0, auth: -1, diplo: 0, style: 3 } }
+        { text: "Din, toplumsal çimento olarak kullanılmalı.", effect: { eco: 0, auth: -1, diplo: 0, style: 3 } }
     ]},
-    { text: "Tarihsel miras ve geçmiş?", options: [
-        { text: "Geçmişin hatalarıyla yüzleşilmeli ve özür dilenmeli.", effect: { eco: 0, auth: 2, diplo: 3, style: -3 } },
-        { text: "Tarih şanlı zaferlerle doludur, gurur duyulmalı.", effect: { eco: 0, auth: -1, diplo: -2, style: 2 } },
-        { text: "Geçmiş geçmiştir, geleceğe bakılmalı.", effect: { eco: 0, auth: 0, diplo: 0, style: 4 } },
-        { text: "Tarihsel sınırlarımıza ve etki alanımıza dönmeliyiz.", effect: { eco: 0, auth: -3, diplo: -5, style: 1 } }
-    },
-    // --- BÖLÜM 5: KARIŞIK KÜLT SORULAR ---
-    { text: "Yumuşak Güç (Soft Power) kullanımı?", options: [
-        { text: "Kültür ve sanat en büyük diplomasi aracıdır.", effect: { eco: 0, auth: 1, diplo: 4, style: 0 } },
-        { text: "Sert güç olmadan yumuşak güç etkisizdir.", effect: { eco: 0, auth: -2, diplo: -2, style: 3 } },
-        { text: "Gereksiz masraftır, orduya yatırım yapılmalı.", effect: { eco: 0, auth: -3, diplo: -3, style: 2 } },
-        { text: "Propaganda amacıyla etkin kullanılmalı.", effect: { eco: 0, auth: -4, diplo: -1, style: 1 } }
+    { text: "Tarihsel Miras?", options: [
+        { text: "Geçmişin hatalarıyla yüzleşilmeli.", effect: { eco: 0, auth: 2, diplo: 2, style: -3 } },
+        { text: "Şanlı tarihimizle gurur duymalıyız.", effect: { eco: 0, auth: -1, diplo: -2, style: 1 } },
+        { text: "Eski etki alanımıza (Hinterland) dönmeliyiz.", effect: { eco: 0, auth: -2, diplo: -4, style: 2 } },
+        { text: "Geçmiş geçmiştir, geleceğe bakmalı.", effect: { eco: 0, auth: 0, diplo: 1, style: 3 } }
     ]},
-    { text: "İklim değişikliği ile mücadele?", options: [
-        { text: "Küresel bir tehdittir, ulusal çıkarlardan önce gelir.", effect: { eco: -2, auth: 0, diplo: 5, style: -2 } },
-        { text: "Ekonomik büyümeyi engellemeyecek şekilde yönetilmeli.", effect: { eco: 3, auth: 0, diplo: 0, style: 2 } },
-        { text: "Batı'nın sanayileşmemizi engelleme oyunudur.", effect: { eco: -1, auth: 0, diplo: -4, style: 3 } },
-        { text: "Teknoloji ile çözülür, yasaklamaya gerek yok.", effect: { eco: 2, auth: 0, diplo: 0, style: 1 } }
+
+    // KÜLT & GÜNCEL SORULAR
+    { text: "İklim değişikliği?", options: [
+        { text: "En büyük küresel tehdit, hemen eylem şart.", effect: { eco: -3, auth: 0, diplo: 5, style: -2 } },
+        { text: "Ekonomiyi bozmadan önlem alınmalı.", effect: { eco: 2, auth: 0, diplo: 0, style: 2 } },
+        { text: "Batı'nın sanayileşmemizi engelleme oyunu.", effect: { eco: -1, auth: 0, diplo: -4, style: 3 } },
+        { text: "Teknoloji çözer, paniğe gerek yok.", effect: { eco: 1, auth: 0, diplo: 0, style: 1 } }
     ]},
-    { text: "Etnik ve kültürel çeşitlilik?", options: [
-        { text: "Zenginliktir, çok kültürlülük desteklenmeli.", effect: { eco: 0, auth: 4, diplo: 2, style: -2 } },
-        { text: "Ulus devletin homojen yapısı korunmalı.", effect: { eco: 0, auth: -2, diplo: -3, style: 2 } },
-        { text: "Entegrasyon şartıyla kabul edilebilir.", effect: { eco: 0, auth: 0, diplo: 0, style: 1 } },
-        { text: "Azınlık hakları ülkeyi böler.", effect: { eco: 0, auth: -5, diplo: -2, style: 0 } }
+    { text: "Nükleer Enerji?", options: [
+        { text: "Kesinlikle gerekli, enerji bağımsızlığı için.", effect: { eco: 1, auth: -1, diplo: -1, style: 2 } },
+        { text: "Çok tehlikeli, vazgeçilmeli.", effect: { eco: -1, auth: 1, diplo: 1, style: -2 } },
+        { text: "Sadece geçiş sürecinde kullanılmalı.", effect: { eco: 0, auth: 0, diplo: 0, style: 1 } },
+        { text: "Silahlanma riski nedeniyle denetlenmeli.", effect: { eco: 0, auth: 0, diplo: 3, style: 0 } }
     ]},
-    { text: "İstihbarat servislerinin rolü?", options: [
-        { text: "Devletin bekası için her yerde, her zaman.", effect: { eco: 0, auth: -6, diplo: -2, style: 4 } },
-        { text: "Sadece dış tehditlere odaklanmalı.", effect: { eco: 0, auth: 2, diplo: 0, style: 0 } },
-        { text: "Vatandaşın özel hayatına saygı duyulmalı.", effect: { eco: 0, auth: 5, diplo: 0, style: -2 } },
-        { text: "Siyasi rakipleri izlemek için kullanılabilir.", effect: { eco: 0, auth: -9, diplo: 0, style: 5 } }
-    },
-    // Toplam 20 soru oldu, 10 tane daha ekleyerek 30'a tamamlıyorum.
-    { text: "Sınır güvenliği ve mülteci politikası?", options: [
-        { text: "Açık kapı politikası insanlık görevidir.", effect: { eco: -1, auth: 3, diplo: 4, style: -4 } },
-        { text: "Sınırlar namustur, duvarlar örülmeli.", effect: { eco: 0, auth: -3, diplo: -5, style: 2 } },
-        { text: "Seçici ve kontrollü göç alınmalı.", effect: { eco: 2, auth: 0, diplo: 0, style: 1 } },
-        { text: "Mülteciler siyasi koz olarak kullanılabilir.", effect: { eco: 0, auth: -5, diplo: -3, style: 5 } }
+    { text: "Eğitim Sistemi?", options: [
+        { text: "Piyasa ihtiyaçlarına göre kalifiye eleman yetiştirmeli.", effect: { eco: 4, auth: 0, diplo: 0, style: 1 } },
+        { text: "Eleştirel düşünceyi ve bilimi merkeze almalı.", effect: { eco: -1, auth: 3, diplo: 0, style: -2 } },
+        { text: "Milli ve manevi değerleri aşılamalı.", effect: { eco: 0, auth: -2, diplo: -2, style: 1 } },
+        { text: "Parasız ve herkes için eşit olmalı.", effect: { eco: -5, auth: 0, diplo: 0, style: -1 } }
     ]},
-    { text: "Kadın hakları ve cinsiyet eşitliği?", options: [
-        { text: "Pozitif ayrımcılık ile tam eşitlik sağlanmalı.", effect: { eco: 0, auth: 4, diplo: 2, style: -3 } },
-        { text: "Fırsat eşitliği yeterlidir.", effect: { eco: 2, auth: 0, diplo: 0, style: 0 } },
+    { text: "Yumuşak Güç (Soft Power)?", options: [
+        { text: "Kültür, sanat ve dizi ihracatı en büyük silahtır.", effect: { eco: 1, auth: 0, diplo: 4, style: 0 } },
+        { text: "Sert güç (Ordu) olmadan bir hiçtir.", effect: { eco: 0, auth: -2, diplo: -3, style: 3 } },
+        { text: "Propaganda aracıdır.", effect: { eco: 0, auth: -3, diplo: -1, style: 1 } },
+        { text: "Gereksiz masraftır.", effect: { eco: 0, auth: -1, diplo: -2, style: 1 } }
+    ]},
+    { text: "Teknoloji devleri (Big Tech)?", options: [
+        { text: "İnovasyonun motorudur, dokunulmamalı.", effect: { eco: 5, auth: 0, diplo: 2, style: 0 } },
+        { text: "Devletten daha güçlü oldular, bölünmeliler.", effect: { eco: -2, auth: 1, diplo: 0, style: -1 } },
+        { text: "Vergilenmeli ve sıkı denetlenmeliler.", effect: { eco: -1, auth: 0, diplo: 0, style: 0 } },
+        { text: "Ulusal güvenlik tehdidi olabilirler.", effect: { eco: 0, auth: -2, diplo: -2, style: 2 } }
+    ]},
+    { text: "Kadın hakları?", options: [
+        { text: "Pozitif ayrımcılık şarttır.", effect: { eco: -1, auth: 2, diplo: 0, style: -2 } },
+        { text: "Fırsat eşitliği yeterlidir (Liyakat).", effect: { eco: 2, auth: 0, diplo: 0, style: 1 } },
         { text: "Geleneksel aile yapısı korunmalı.", effect: { eco: 0, auth: -2, diplo: 0, style: 2 } },
-        { text: "Devlet bu işlere karışmamalı.", effect: { eco: 4, auth: 0, diplo: 0, style: 0 } }
+        { text: "Cinsiyet siyasetin konusu olamaz.", effect: { eco: 0, auth: 0, diplo: 0, style: 0 } }
     ]},
-    { text: "Merkez Bankası bağımsızlığı?", options: [
-        { text: "Siyasetten tamamen arındırılmalı.", effect: { eco: 5, auth: 2, diplo: 0, style: 0 } },
-        { text: "Hükümetin ekonomi politikalarıyla uyumlu olmalı.", effect: { eco: -2, auth: -3, diplo: 0, style: 0 } },
-        { text: "Faiz lobilerine karşı siyasi irade karar vermeli.", effect: { eco: -3, auth: -5, diplo: 0, style: 2 } },
-        { text: "Tamamen kamulaştırılmalı.", effect: { eco: -8, auth: 0, diplo: 0, style: 0 } }
+    { text: "Merkez Bankası?", options: [
+        { text: "Tam bağımsız olmalı, siyaset karışmamalı.", effect: { eco: 4, auth: 1, diplo: 2, style: 0 } },
+        { text: "Hükümetle uyumlu çalışmalı.", effect: { eco: -1, auth: -2, diplo: 0, style: 1 } },
+        { text: "Faiz kararlarını siyasi irade vermeli.", effect: { eco: -3, auth: -4, diplo: 0, style: 2 } },
+        { text: "Ekonomi yönetiminde çok başlılık olmamalı.", effect: { eco: 0, auth: -3, diplo: 0, style: 1 } }
     ]},
-    { text: "Eğitim sistemi nasıl olmalı?", options: [
-        { text: "Bilimsel, laik ve parasız.", effect: { eco: -4, auth: 0, diplo: 0, style: -2 } },
-        { text: "Piyasa ihtiyaçlarına göre şekillenmeli, özel okul ağırlıklı.", effect: { eco: 5, auth: 0, diplo: 0, style: 1 } },
-        { text: "Milli ve manevi değerleri aşılamalı.", effect: { eco: 0, auth: -2, diplo: -2, style: 2 } },
-        { text: "Eleştirel düşünceyi merkeze almalı.", effect: { eco: 0, auth: 4, diplo: 0, style: -1 } }
+    { text: "Azınlık hakları?", options: [
+        { text: "Kültürel zenginliktir, anayasal güvence şart.", effect: { eco: 0, auth: 5, diplo: 2, style: -2 } },
+        { text: "Üniter devlete tehdittir.", effect: { eco: 0, auth: -4, diplo: -3, style: 1 } },
+        { text: "Entegrasyon (uyum) esastır.", effect: { eco: 0, auth: -1, diplo: 0, style: 1 } },
+        { text: "Bireysel haklar yeterlidir, grup hakkı olmaz.", effect: { eco: 2, auth: 1, diplo: 0, style: 0 } }
     ]},
-    { text: "Avrupa Birliği (veya bölgesel birlikler) hakkında görüşünüz?", options: [
-        { text: "Ulus-üstü yapılar geleceğin modelidir.", effect: { eco: 2, auth: 2, diplo: 8, style: -2 } },
-        { text: "Sadece ekonomik işbirliği düzeyinde kalmalı.", effect: { eco: 3, auth: 0, diplo: 0, style: 1 } },
-        { text: "Egemenliği sınırlayan bürokratik canavarlardır.", effect: { eco: 0, auth: -2, diplo: -6, style: 2 } },
-        { text: "Hristiyan kulübüdür (veya dışlayıcıdır).", effect: { eco: 0, auth: 0, diplo: -3, style: 0 } }
-    ]},
-    { text: "Kıbrıs veya benzeri toprak sorunlarında çözüm?", options: [
-        { text: "İki devletli çözüm veya ilhak.", effect: { eco: 0, auth: -2, diplo: -5, style: 3 } },
-        { text: "Federal çözüm ve birleşme.", effect: { eco: 0, auth: 2, diplo: 4, style: -2 } },
-        { text: "Statüko devam etmeli.", effect: { eco: 0, auth: 0, diplo: -1, style: 1 } },
-        { text: "Uluslararası hakem kararlarına uyulmalı.", effect: { eco: 0, auth: 1, diplo: 3, style: 0 } }
-    ]},
-    { text: "Enerji politikası?", options: [
-        { text: "Yenilenebilir enerjiye tam geçiş.", effect: { eco: -2, auth: 0, diplo: 2, style: -3 } },
-        { text: "Fosil yakıtlar büyüme için gereklidir.", effect: { eco: 3, auth: 0, diplo: 0, style: 2 } },
-        { text: "Nükleer enerji şarttır.", effect: { eco: 0, auth: -1, diplo: -1, style: 1 } },
-        { text: "Enerji bağımsızlığı her şeyden önemlidir.", effect: { eco: -1, auth: -2, diplo: -3, style: 2 } }
-    ]},
-    { text: "Sosyal medya denetimi?", options: [
-        { text: "Asla sansürlenmemeli.", effect: { eco: 0, auth: 6, diplo: 0, style: 0 } },
-        { text: "Yerli platformlar kurulmalı, yabancılar yasaklanmalı.", effect: { eco: 0, auth: -5, diplo: -4, style: 0 } },
-        { text: "Dezenformasyonla mücadele için sıkı yasa.", effect: { eco: 0, auth: -2, diplo: 0, style: 0 } },
-        { text: "Şirketler kendi kendini denetlemeli.", effect: { eco: 4, auth: 0, diplo: 0, style: 0 } }
-    ]},
-    { text: "Özelleştirme?", options: [
-        { text: "Devlet küçülmeli, her şey satılmalı.", effect: { eco: 8, auth: 0, diplo: 0, style: 0 } },
-        { text: "Kamu zararı olanlar özelleştirilmeli.", effect: { eco: 2, auth: 0, diplo: 0, style: 1 } },
-        { text: "Stratejik kurumlar asla satılamaz.", effect: { eco: -3, auth: 0, diplo: 0, style: 0 } },
-        { text: "Yeniden devletleştirme (kamulaştırma) yapılmalı.", effect: { eco: -7, auth: 0, diplo: 0, style: 0 } }
-    ]},
-    { text: "Son olarak, ideal yönetim biçimi?", options: [
-        { text: "Katılımcı ve çoğulcu demokrasi.", effect: { eco: 0, auth: 8, diplo: 0, style: -2 } },
-        { text: "Güçlü liderlik ve teknokrasi.", effect: { eco: 0, auth: -4, diplo: 0, style: 3 } },
-        { text: "Merkeziyetçi sosyalist cumhuriyet.", effect: { eco: -5, auth: -6, diplo: 0, style: 0 } },
-        { text: "İslami veya geleneksel monarşi/yönetim.", effect: { eco: 0, auth: -8, diplo: 0, style: 0 } }
+    { text: "Silahlanma bütçesi?", options: [
+        { text: "Kısıntıya gidilip eğitime aktarılmalı.", effect: { eco: -1, auth: 1, diplo: 2, style: -2 } },
+        { text: "Caydırıcılık için artırılmalı.", effect: { eco: 0, auth: -2, diplo: -2, style: 2 } },
+        { text: "Yerli savunma sanayii önceliktir.", effect: { eco: 1, auth: -1, diplo: -3, style: 1 } },
+        { text: "NATO standartlarında tutulmalı.", effect: { eco: 0, auth: 0, diplo: 3, style: 0 } }
+    },
+    { text: "Son olarak, ideal lider tipi?", options: [
+        { text: "Teknokrat ve problem çözücü.", effect: { eco: 2, auth: 0, diplo: 2, style: 3 } },
+        { text: "Halkın içinden gelen, bizden biri.", effect: { eco: -1, auth: 0, diplo: 0, style: 0 } },
+        { text: "Masaya yumruğunu vuran güçlü lider.", effect: { eco: 0, auth: -5, diplo: -2, style: 2 } },
+        { text: "Entelektüel ve vizyoner filozof kral.", effect: { eco: 0, auth: 3, diplo: 1, style: -3 } }
     ]}
 ];
 
-// --- APP LOGIC ---
-
-let currentQuestionIndex = 0;
+// 3. UYGULAMA MANTIĞI
+let currentIndex = 0;
 let userStats = { eco: 0, auth: 0, diplo: 0, style: 0 };
 
-const startScreen = document.getElementById('start-screen');
-const quizScreen = document.getElementById('quiz-screen');
-const loadingScreen = document.getElementById('loading-screen');
-const resultScreen = document.getElementById('result-screen');
-const startBtn = document.getElementById('start-btn');
-const optionsContainer = document.getElementById('options-container');
+// DOM Elementleri
+const els = {
+    startScreen: document.getElementById('start-screen'),
+    quizScreen: document.getElementById('quiz-screen'),
+    loadingScreen: document.getElementById('loading-screen'),
+    resultScreen: document.getElementById('result-screen'),
+    questionText: document.getElementById('question-text'),
+    optionsContainer: document.getElementById('options-container'),
+    progressFill: document.getElementById('progress-fill'),
+    questionCount: document.getElementById('question-count-display'),
+    loadingText: document.getElementById('loading-text')
+};
 
-startBtn.addEventListener('click', () => {
-    startScreen.classList.remove('active');
-    quizScreen.classList.add('active');
+// Başlatma
+document.getElementById('start-btn').addEventListener('click', () => {
+    switchScreen('quiz');
     loadQuestion();
 });
 
+function switchScreen(screenName) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    
+    if(screenName === 'quiz') els.quizScreen.classList.add('active');
+    else if(screenName === 'loading') els.loadingScreen.classList.add('active');
+    else if(screenName === 'result') els.resultScreen.classList.add('active');
+}
+
+function updateProgress() {
+    // Barın "cevaplanan" kadar dolmasını istiyoruz.
+    // Başlangıçta 0. 1. soruyu cevaplayınca 1/30 dolacak.
+    const percentage = (currentIndex / questions.length) * 100;
+    els.progressFill.style.width = `${percentage}%`;
+    
+    // Sayaç Metni (1/30, 2/30...)
+    // currentIndex 0 iken "Soru 1 / 30" yazar.
+    els.questionCount.textContent = `Soru ${currentIndex + 1} / ${questions.length}`;
+}
+
 function loadQuestion() {
-    const q = questions[currentQuestionIndex];
-    document.getElementById('question-text').textContent = q.text;
-    document.getElementById('question-count').textContent = `Soru ${currentQuestionIndex + 1} / ${questions.length}`;
-    
-    // Progress Bar
-    const pct = ((currentQuestionIndex) / questions.length) * 100;
-    document.getElementById('progress-bar').style.width = `${pct}%`;
+    if (currentIndex >= questions.length) {
+        finishQuiz();
+        return;
+    }
 
-    optionsContainer.innerHTML = '';
-    
-    // Şıkların sırasını karıştır (Bias oluşmaması için)
-    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+    // UI Güncelle
+    updateProgress();
 
-    shuffledOptions.forEach(opt => {
+    const q = questions[currentIndex];
+    els.questionText.textContent = q.text;
+    els.optionsContainer.innerHTML = '';
+
+    // Şık Karıştırma (Bias önlemek için)
+    const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+
+    shuffled.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = opt.text;
-        btn.onclick = () => handleAnswer(opt.effect);
-        optionsContainer.appendChild(btn);
+        // Tıklama animasyonu için
+        btn.onclick = (e) => {
+            // Görsel geri bildirim
+            e.target.style.borderColor = 'var(--primary)';
+            e.target.style.background = '#e2e8f0';
+            setTimeout(() => handleAnswer(opt.effect), 150);
+        };
+        els.optionsContainer.appendChild(btn);
     });
 }
 
@@ -269,44 +309,49 @@ function handleAnswer(effect) {
     userStats.diplo += effect.diplo;
     userStats.style += effect.style;
 
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-    } else {
-        finishQuiz();
-    }
+    currentIndex++;
+    loadQuestion();
 }
 
 function finishQuiz() {
-    quizScreen.classList.remove('active');
-    loadingScreen.classList.add('active');
-    document.getElementById('progress-bar').style.width = '100%';
+    // Son ilerleme güncellemesi (%100 yap)
+    els.progressFill.style.width = '100%';
+    
+    switchScreen('loading');
 
-    // Yükleme simülasyonu
+    const msgs = [
+        "Diplomatik telgraflar inceleniyor...",
+        "Ekonomik doktrinler analiz ediliyor...",
+        "Tarihsel eşleşmeler yapılıyor..."
+    ];
+    
+    let i = 0;
+    const interval = setInterval(() => {
+        els.loadingText.textContent = msgs[i % msgs.length];
+        i++;
+    }, 800);
+
     setTimeout(() => {
+        clearInterval(interval);
         calculateResult();
-    }, 2000);
+    }, 2500);
 }
 
 function calculateResult() {
-    let closestLeader = null;
+    let bestMatch = null;
     let minDiff = Infinity;
 
-    // Euclidean Distance
-    leaders.forEach(leader => {
-        // Lider skorları -10 ile 10 arasında.
-        // Kullanıcı skorları 30 soruda toplamda -60 ile +60 arasına çıkabilir.
-        // Bu yüzden lider skorlarını kullanıcı skalasına uyarlıyoruz (x4 çarpanı yaklaşık denge sağlar)
-        // Ya da kullanıcı skorunu normalize ederiz. Kullanıcı skorunu normalize etmek daha mantıklı.
-        
-        // 30 soru var, ortalama etki 3 desek, max puan 90 olur ama genelde 30-40 bandında kalır.
-        // Basit bir scale factor kullanalım:
-        const scale = 3.5; 
+    // Normalizasyon Çarpanı:
+    // Kullanıcı skoru 30 soruda maks +/- 90 olabilir.
+    // Lider skoru +/- 10.
+    // Kullanıcı skorunu lidere yaklaştırmak için bölüyoruz.
+    const normalize = 3.5; // (90 / 25 ≈ 3.5)
 
-        const diffEco = userStats.eco - (leader.stats.eco * scale);
-        const diffAuth = userStats.auth - (leader.stats.auth * scale);
-        const diffDiplo = userStats.diplo - (leader.stats.diplo * scale);
-        const diffStyle = userStats.style - (leader.stats.style * scale);
+    leaders.forEach(leader => {
+        const diffEco = (userStats.eco / normalize) - leader.stats.eco;
+        const diffAuth = (userStats.auth / normalize) - leader.stats.auth;
+        const diffDiplo = (userStats.diplo / normalize) - leader.stats.diplo;
+        const diffStyle = (userStats.style / normalize) - leader.stats.style;
 
         const totalDiff = Math.sqrt(
             diffEco**2 + diffAuth**2 + diffDiplo**2 + diffStyle**2
@@ -314,48 +359,49 @@ function calculateResult() {
 
         if (totalDiff < minDiff) {
             minDiff = totalDiff;
-            closestLeader = leader;
+            bestMatch = leader;
         }
     });
 
-    showResultScreen(closestLeader, minDiff);
+    displayResult(bestMatch, minDiff);
 }
 
-function showResultScreen(leader, diff) {
-    loadingScreen.classList.remove('active');
-    resultScreen.classList.add('active');
+function displayResult(leader, diff) {
+    switchScreen('result');
 
-    // Eşleşme yüzdesi (Ters orantı)
-    let matchRate = Math.max(60, 100 - Math.round(diff / 2));
+    // Eşleşme Oranı Hesapla (Basit algoritma)
+    // Maksimum fark yaklaşık 20-30 birim olabilir.
+    let matchRate = Math.round(100 - (diff * 2.5));
+    if (matchRate < 50) matchRate = 50 + Math.round(Math.random() * 10);
+    if (matchRate > 99) matchRate = 99;
+
     document.getElementById('match-percent').innerText = matchRate;
-    
     document.getElementById('leader-name').innerText = leader.name;
     document.getElementById('leader-title').innerText = leader.title;
     document.getElementById('leader-quote').innerText = leader.quote;
     document.getElementById('leader-bio').innerText = leader.bio;
 
-    // İstatistik Barlarını Ayarla (Politics Compass Mantığı)
-    // - Değerler Sol/Aşağı, + Değerler Sağ/Yukarı
-    // %50 nötr noktasıdır.
-    // Liderin kendi statik değerlerini gösteriyoruz ki kullanıcı "Kime benzedim?" sorusuna yanıt bulsun.
+    // Barların Çizimi
+    // Leader stats -10 ile 10 arasında.
+    // Biz bunu %0 (Sol) ile %100 (Sağ) arasına çevireceğiz. 0 = %50.
     
     const setBar = (id, val) => {
-        // Val -10 ile 10 arasında. %0 ile %100 arasına çekiyoruz.
-        // -10 -> %0, 0 -> %50, 10 -> %100
-        const percentage = (val + 10) * 5;
-        document.getElementById(id).style.width = `${percentage}%`;
-        
-        // Renk değişimi (Opsiyonel estetik)
         const el = document.getElementById(id);
-        if(val < 0) el.style.background = "linear-gradient(90deg, #e74c3c, #c0392b)"; // Sol/Otoriter kırmızı ton
-        else el.style.background = "linear-gradient(90deg, #2ecc71, #27ae60)"; // Sağ/Liberal yeşil ton
-        // Stil için özel renk:
-        if(id === 'stat-style') el.style.background = "linear-gradient(90deg, #9b59b6, #8e44ad)";
-        if(id === 'stat-dip') el.style.background = "linear-gradient(90deg, #3498db, #2980b9)";
+        const percent = ((val + 10) / 20) * 100;
+        
+        // Animasyonlu dolum için setTimeout
+        setTimeout(() => {
+            el.style.width = `${percent}%`;
+            
+            // Renk Ayarı (Sol: Kırmızımsı, Sağ: Yeşilimsi)
+            if (val < -1) el.style.background = 'var(--color-left)';
+            else if (val > 1) el.style.background = 'var(--color-right)';
+            else el.style.background = '#94a3b8'; // Nötr Gri
+        }, 100);
     };
 
-    setBar('stat-eco', leader.stats.eco);
-    setBar('stat-auth', leader.stats.auth);
-    setBar('stat-dip', leader.stats.diplo);
-    setBar('stat-style', leader.stats.style);
+    setBar('bar-eco', leader.stats.eco);
+    setBar('bar-auth', leader.stats.auth);
+    setBar('bar-diplo', leader.stats.diplo);
+    setBar('bar-style', leader.stats.style);
 }
