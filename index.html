@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangi Dünya Liderisin? | Marmara GDS</title>
-    <meta name="description" content="Marmara GDS Küresel Diplomasi Kulübü Siyasi Liderlik Testi">
+    <title>Siyasi Doktrin ve Liderlik Testi | Marmara GDS</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +12,7 @@
 
     <header class="main-header">
         <div class="logo-container">
-            <div class="logo-icon"><i class="fa-solid fa-globe"></i></div>
+            <div class="logo-icon"><i class="fa-solid fa-scale-balanced"></i></div>
             <div class="logo-text">
                 <h1>MARMARA GDS</h1>
                 <p>KÜRESEL DİPLOMASİ KULÜBÜ</p>
@@ -24,41 +23,43 @@
     <main class="container">
         <section id="start-screen" class="screen active">
             <div class="intro-content">
-                <h2>Senin Doktrinin Hangisi?</h2>
-                <p class="lead-text">Tarihin akışını değiştiren 39 ikonik liderden hangisinin stratejik zekasına ve siyasi karakterine sahipsin? Realpolitik, İdealizm, Devrimcilik veya Pragmatizm...</p>
+                <h2>Liderlik Doktrin Analizi</h2>
+                <p class="lead-text">Realizmden İdealizme, Devletçilikten Liberalizme... Siyasi reflekslerinizi 30 soruluk bu kült envanter ile test edin. Dünya siyaset tarihine damga vurmuş 39 liderden hangisiyle aynı masada oturuyorsunuz?</p>
                 <div class="info-box">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Bu test, Siyaset Bilimi ve Uluslararası İlişkiler literatüründeki temel doktrinler baz alınarak hazırlanmıştır.</span>
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Not: Sorular Siyaset Bilimi literatürü baz alınarak hazırlanmıştır.</span>
                 </div>
-                <button id="start-btn" class="btn primary-btn">Teste Başla <i class="fa-solid fa-chevron-right"></i></button>
+                <button id="start-btn" class="btn primary-btn">Analizi Başlat</button>
             </div>
         </section>
 
         <section id="quiz-screen" class="screen">
+            <div class="quiz-header-info">
+                <span id="question-count">Soru 1 / 30</span>
+            </div>
             <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
             <div class="question-container">
                 <h3 id="question-text">Soru yükleniyor...</h3>
-                <div id="options-container" class="options-grid">
-                    </div>
+                <div id="options-container" class="options-grid"></div>
             </div>
         </section>
 
         <section id="loading-screen" class="screen">
             <div class="loader">
                 <div class="globe-spinner"></div>
-                <p>Doktrinler Analiz Ediliyor...</p>
-                <span id="loading-text">Jeopolitik veriler taranıyor...</span>
+                <p>Doktrin Eşleşmesi Yapılıyor...</p>
+                <span id="loading-text">Veriler işleniyor...</span>
             </div>
         </section>
 
         <section id="result-screen" class="screen">
             <div class="result-card">
                 <div class="result-header">
-                    <span class="match-rate">Eşleşme Oranı: %<span id="match-percent">98</span></span>
-                    <h2 id="leader-name">Lider İsmi</h2>
-                    <p id="leader-title" class="leader-title">Ünvan / Dönem</p>
+                    <span class="match-rate">Benzerlik İndeksi: %<span id="match-percent">0</span></span>
+                    <h2 id="leader-name">Lider Adı</h2>
+                    <p id="leader-title" class="leader-title">Ünvan</p>
                 </div>
                 
                 <div class="result-body">
@@ -69,39 +70,50 @@
                     <div class="leader-desc">
                         <blockquote>
                             <i class="fa-solid fa-quote-left"></i>
-                            <span id="leader-quote">Liderin ikonik bir sözü burada yer alacak.</span>
+                            <span id="leader-quote">Söz</span>
                             <i class="fa-solid fa-quote-right"></i>
                         </blockquote>
-                        <p id="leader-bio">Liderin detaylı siyasi analizi ve kullanıcı ile örtüşen özellikleri.</p>
+                        <p id="leader-bio">Biyografi</p>
                         
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <span>Otorite</span>
-                                <div class="stat-bar"><div id="stat-auth" style="width: 0%"></div></div>
+                                <div class="stat-labels">
+                                    <span>Otoriter</span>
+                                    <span>Demokratik</span>
+                                </div>
+                                <div class="stat-bar-bg"><div id="stat-auth" class="stat-fill"></div></div>
                             </div>
                             <div class="stat-item">
-                                <span>Ekonomi</span>
-                                <div class="stat-bar"><div id="stat-eco" style="width: 0%"></div></div>
+                                <div class="stat-labels">
+                                    <span>Devletçi (Sol)</span>
+                                    <span>Liberal (Sağ)</span>
+                                </div>
+                                <div class="stat-bar-bg"><div id="stat-eco" class="stat-fill"></div></div>
                             </div>
                             <div class="stat-item">
-                                <span>Diplomasi</span>
-                                <div class="stat-bar"><div id="stat-dip" style="width: 0%"></div></div>
+                                <div class="stat-labels">
+                                    <span>Ulusalcı</span>
+                                    <span>Küreselci</span>
+                                </div>
+                                <div class="stat-bar-bg"><div id="stat-dip" class="stat-fill"></div></div>
+                            </div>
+                             <div class="stat-item">
+                                <div class="stat-labels">
+                                    <span>İdealist</span>
+                                    <span>Realist</span>
+                                </div>
+                                <div class="stat-bar-bg"><div id="stat-style" class="stat-fill"></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="result-footer">
-                    <button class="btn secondary-btn" onclick="location.reload()">Tekrar Test Et</button>
-                    <button class="btn share-btn">Sonucu Paylaş <i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn secondary-btn" onclick="location.reload()">Testi Tekrarla</button>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Marmara GDS (Küresel Diplomasi Kulübü). Tüm hakları saklıdır.</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
